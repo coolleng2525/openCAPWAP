@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.ini": "c",
+        "format": "c",
+        "sstream": "c",
+        "stdexcept": "c"
+    }
+}
