@@ -581,9 +581,10 @@ cw_failure:
 
 int main (int argc, const char * argv[]) {
 	
-
+	printf("WTP Daemon Mode\n");
+	printf("Usage: WTP working_path\n");
 	/* Daemon Mode */
-
+	DEBUG_LOG("WTP Daemon Mode");
 	pid_t pid;
 	
 	if (argc <= 1)
@@ -602,7 +603,7 @@ int main (int argc, const char * argv[]) {
 		fclose(stdout);
 	}	
 
-	
+	DEBUG_LOG("222");
 	CWStateTransition nextState = CW_ENTER_DISCOVERY;
 	//Elena to move line 611
 	//CWLogInitFile(WTP_LOG_FILE_NAME);
@@ -620,6 +621,12 @@ int main (int argc, const char * argv[]) {
 		//Elena: fprintf
 		fprintf(stderr, "Can't start WTP");
 		exit(1);
+	}
+
+	DEBUG_LOG("WTP Log File: 33");
+	if (wtpLogFile == NULL) {
+		DEBUG_LOG("WTP Log File is NULL use default : %s", WTP_LOG_FILE_NAME);
+		wtpLogFile = WTP_LOG_FILE_NAME;
 	}
 	
 	//Elena Agostini - 05/2014
@@ -653,13 +660,13 @@ int main (int argc, const char * argv[]) {
 	CWCreateThreadCondition(&gInterfaceWait);
 	CWSetConditionSafeList(gPacketReceiveList, &gInterfaceWait);
 	CWSetConditionSafeList(gFrameList, &gInterfaceWait);
-
+	DEBUG_LOG("xx1");
 	//Elena Agostini: Mutex and Cond dedicated to Data Packet List
 	CWCreateThreadMutex(&gInterfaceMutexData);
 	CWCreateThreadCondition(&gInterfaceWaitData);
 	CWSetMutexSafeList(gPacketReceiveDataList, &gInterfaceMutexData);
 	CWSetConditionSafeList(gPacketReceiveDataList, &gInterfaceWaitData);
-
+	DEBUG_LOG("main: xx2");
 
 	CWLog("Starting WTP...");
 	
@@ -671,7 +678,7 @@ int main (int argc, const char * argv[]) {
 		CWLog("Can't init timer module");
 		exit(1);
 	}
-
+	DEBUG_LOG("main: xx2");
 
 /* Elena Agostini - 04/2014: DTLS Data Channel || DTLS Control Channel */
 #if defined(CW_NO_DTLS) && !defined(CW_DTLS_DATA_CHANNEL)
@@ -718,7 +725,7 @@ int main (int argc, const char * argv[]) {
 		exit(1);
 	}
 	*/
-
+	DEBUG_LOG("main: xx2");
 	/* if AC address is given jump Discovery and use this address for Joining */
 	if(gWTPForceACAddress != NULL)	nextState = CW_ENTER_JOIN;
 
@@ -749,9 +756,11 @@ int main (int argc, const char * argv[]) {
 				break;
 			case CW_QUIT:
 				CWWTPDestroy();
+				DEBUG_LOG("main: out");
 				return 0;
 		}
 	}
+	DEBUG_LOG("main: quit");
 }
 
 __inline__ unsigned int CWGetSeqNum() {

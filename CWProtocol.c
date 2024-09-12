@@ -991,7 +991,7 @@ CWBool CWParseTransportHeader(CWProtocolMessage *msgPtr, CWProtocolTransportHead
 		}
  	}
 
-	CWDebugLog(NULL);
+	CWDebugLog("NULL");
 	
 	return (transport4BytesLen == 2 || (transport4BytesLen == 4 && optionalWireless == 1) || m ) ? CW_TRUE : CWErrorRaise(CW_ERROR_INVALID_FORMAT, "Malformed Transport Header"); //TEMP?
 }
@@ -1018,7 +1018,7 @@ CWBool CWParseControlHeader(CWProtocolMessage *msgPtr, CWControlHeaderValues *va
 //	valPtr->timestamp = CWProtocolRetrieve32(msgPtr);
 //	CWDebugLog("TIME_STAMP: %u",	valPtr->timestamp);
 
-	CWDebugLog(NULL);
+	CWDebugLog("NULL");
 	
 	return CW_TRUE;
 }

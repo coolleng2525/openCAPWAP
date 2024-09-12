@@ -140,6 +140,7 @@ CWBool CWParseTheFile(CWBool isCount) {
 			}
 		}
 	}
+	CWLog("Parsing Config File... : %s", CW_CONFIG_FILE);
 	
 	gCWConfigFile = fopen (CW_CONFIG_FILE, "rb");
 	if (gCWConfigFile == NULL) CWErrorRaiseSystemError(CW_ERROR_GENERAL);

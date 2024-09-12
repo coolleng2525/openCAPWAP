@@ -74,7 +74,7 @@ CWBool CWNetworkSendUnsafeUnconnected(CWSocket sock,
 	if(buf == NULL || addrPtr == NULL) 
 		return CWErrorRaise(CW_ERROR_WRONG_ARG, NULL);
 	
-	CWUseSockNtop(addrPtr, NULL;/*CWDebugLog(str);*/);
+	CWUseSockNtop(addrPtr, NULL;/*CWDebugLog("%s", str);*/);
 
 	while(sendto(sock, buf, len, 0, (struct sockaddr*)addrPtr, CWNetworkGetAddressSize(addrPtr)) < 0) {
 
@@ -191,7 +191,7 @@ CWBool CWNetworkInitSocketClient(CWSocket *sockPtr, CWNetworkLev4Address *addrPt
 	/* NULL addrPtr means that we don't want to connect to a
 	 * specific address */ 
 	if(addrPtr != NULL) {
-		CWUseSockNtop(((struct sockaddr*)addrPtr), CWDebugLog(str););
+		CWUseSockNtop(((struct sockaddr*)addrPtr), CWDebugLog("%s", str););
 
 		if(connect((*sockPtr), ((struct sockaddr*)addrPtr), CWNetworkGetAddressSize(addrPtr)) < 0) {
 
@@ -260,7 +260,7 @@ CWBool CWNetworkInitSocketClientDataChannel(CWSocket *sockPtr, CWNetworkLev4Addr
 	if(addrPtr != NULL) {
 		CW_COPY_NET_ADDR_PTR(&addrPtrDataChannel,addrPtr);
 		sock_set_port_cw((struct sockaddr*)&addrPtrDataChannel, htons(CW_DATA_PORT));
-		CWUseSockNtop((struct sockaddr*)&addrPtrDataChannel, CWDebugLog(str););
+		CWUseSockNtop((struct sockaddr*)&addrPtrDataChannel, CWDebugLog("%s", str););
 
 		if(connect((*sockPtr), (struct sockaddr*)&addrPtrDataChannel, CWNetworkGetAddressSize(&addrPtrDataChannel)) < 0) {
 
@@ -325,7 +325,7 @@ CWBool CWNetworkInitSocketClientWithPort(CWSocket *sockPtr, CWNetworkLev4Address
 	/* NULL addrPtr means that we don't want to connect to a
 	 * specific address */ 
 	if(addrPtr != NULL) {
-		CWUseSockNtop(((struct sockaddr*)addrPtr), CWDebugLog(str););
+		CWUseSockNtop(((struct sockaddr*)addrPtr), CWDebugLog("%s", str););
 
 		if(connect((*sockPtr), ((struct sockaddr*)addrPtr), CWNetworkGetAddressSize(addrPtr)) < 0) {
 
@@ -388,7 +388,7 @@ CWBool CWNetworkInitSocketClientDataChannelWithPort(CWSocket *sockPtr, CWNetwork
 	if(addrPtr != NULL) {
 		CW_COPY_NET_ADDR_PTR(&addrPtrDataChannel,addrPtr);
 		sock_set_port_cw((struct sockaddr*)&addrPtrDataChannel, htons(CW_DATA_PORT));
-		CWUseSockNtop((struct sockaddr*)&addrPtrDataChannel, CWDebugLog(str););
+		CWUseSockNtop((struct sockaddr*)&addrPtrDataChannel, CWDebugLog("%s", str););
 
 		if(connect((*sockPtr), (struct sockaddr*)&addrPtrDataChannel, CWNetworkGetAddressSize(&addrPtrDataChannel)) < 0) {
 

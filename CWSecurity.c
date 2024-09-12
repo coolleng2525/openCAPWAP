@@ -99,7 +99,7 @@ int psk_key2bn(const char *psk_key, unsigned char *psk, unsigned int max_psk_len
 								if((r=(arg)) <= 0) {			\
 									{stuff}				\
 									ERR_error_string(/*SSL_get_error((session),r)*/ ERR_get_error(), ___buf);	\
-									CWDebugLog(strerror(errno));CWErrorRaise(CW_ERROR_GENERAL, ___buf);		\
+									CWDebugLog("%s", strerror(errno));CWErrorRaise(CW_ERROR_GENERAL, ___buf);		\
 									return CW_FALSE;		\
 								}					\
 							}
@@ -751,7 +751,7 @@ int CWSecurityVerifyCB(int ok, X509_STORE_CTX *ctx) {
 	err_cert = X509_STORE_CTX_get_current_cert(ctx);
 	
 	err = X509_STORE_CTX_get_error(ctx);
-	CWDebugLog(X509_verify_cert_error_string(err));
+	CWDebugLog("%s", X509_verify_cert_error_string(err));
 	
 	depth = X509_STORE_CTX_get_error_depth(ctx);
     

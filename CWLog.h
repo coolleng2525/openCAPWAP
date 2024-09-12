@@ -42,8 +42,28 @@
 extern char gLogFileName[];
 
 __inline__ void CWVLog(const char *format, va_list args);
-__inline__ void CWLog(const char *format, ...);
-__inline__ void CWDebugLog(const char *format, ...);
+__inline__ void __CWLog(const char *format, ...);
+__inline__ void __CWDebugLog(const char *format, ...);
+__inline__ char *get_time_string();
 void CWLogInitFile(char *fileName);
+#define MY_LOG_FILE "/var/wtp/xxx_wtp.log"
+
+#define DEBUG_LOG(format, args...) do{\
+    FILE * fd = fopen(MY_LOG_FILE, "a+"); \
+        if(fd < 0) {\
+            printf("Can't open debug.log\n");\
+        } else {\
+            fprintf(fd, "[%s] %s:%d %s " format "\n", get_time_string(), __FILE__, __LINE__, __FUNCTION__,  ##args);\
+            fclose(fd);\
+        }\
+    }while(0)
+#define CWLog(format, args...) do{\
+        __CWLog("[%s] %s:%d %s " format "\n", get_time_string(), __FILE__, __LINE__, __FUNCTION__,  ##args);\
+        DEBUG_LOG(format, ##args);\
+    }while(0)
+#define CWDebugLog(format, args...) do{\
+        __CWDebugLog("[%s] %s:%d %s " format "\n", get_time_string(), __FILE__, __LINE__, __FUNCTION__,  ##args);\
+        DEBUG_LOG(format, ##args);\
+    }while(0)
 
 #endif

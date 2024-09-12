@@ -142,16 +142,30 @@ __inline__ void CWVLog(const char *format, va_list args) {
 	CW_FREE_OBJECT(logStr);
 }
 
-__inline__ void CWLog(const char *format, ...) {
+
+__inline__ void __CWLog(const char *format, ...) {
 	va_list args;
 	
 	va_start(args, format);
-	if (gEnabledLog)
-		{CWVLog(format, args);}
+	if (gEnabledLog){
+		CWVLog(format, args);
+	}
 	va_end(args);
 }
 
-__inline__ void CWDebugLog(const char *format, ...) {
+__inline__ char * get_time_string() {
+	time_t now;
+	char *nowReadable = NULL;
+	
+	now = time(NULL);
+	nowReadable = ctime(&now);
+	
+	nowReadable[strlen(nowReadable)-1] = '\0';
+	
+	return nowReadable;
+}
+
+__inline__ void __CWDebugLog(const char *format, ...) {
 	#ifdef CW_DEBUGGING
 		char *logStr = NULL;
 		va_list args;

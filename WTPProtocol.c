@@ -972,7 +972,7 @@ CWBool CWParseACIPv4List(CWProtocolMessage *msgPtr, int len, ACIPv4ListValues *v
 		addr.sin_addr.s_addr = (valPtr->ACIPv4List)[i];
 		addr.sin_family = AF_INET;
 		addr.sin_port = 1024;
-		CWUseSockNtop(&addr, CWDebugLog(str););
+		CWUseSockNtop(&addr, CWDebugLog("%s", str););
 	}
 	
 	CWParseMessageElementEnd();

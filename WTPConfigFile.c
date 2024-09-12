@@ -116,6 +116,7 @@ CWBool CWConfigFileInitLib() {
 	gConfigValues[14].code = "</WTP_LOG_FILE>";
 	gConfigValues[14].value.str_value = NULL;
 */
+	CWLog("WTP Configuration File Library Initialized\n");
 	return CW_TRUE;
 }
 

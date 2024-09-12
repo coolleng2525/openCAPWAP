@@ -137,7 +137,7 @@ CWStateTransition CWWTPEnterDiscovery() {
                 CW_CREATE_OBJECT_ERR(gACInfoPtr, CWACInfoValues, return CW_QUIT;);
 				
 				CWNetworkGetAddressForHost(gCWACList[i].address, &(gACInfoPtr->preferredAddress));
-				CWUseSockNtop(&(gACInfoPtr->preferredAddress), CWDebugLog(str););
+				CWUseSockNtop(&(gACInfoPtr->preferredAddress), CWDebugLog("%s", str););
 				j = CWErr(CWNetworkSendUnsafeUnconnected(gWTPSocket,
 									 &(gACInfoPtr->preferredAddress),
 									 (*msgPtr).msg,
