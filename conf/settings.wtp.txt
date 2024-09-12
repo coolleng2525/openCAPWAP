@@ -1,0 +1,3 @@
+		<RADIO_PHY_TOT>1
+		<RADIO_PHY_NAME_0>phy2
+        <LOG_FILE_WTP>/var/wtp/wtp.log
